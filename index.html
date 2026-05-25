@@ -5,26 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Arcanjo • Espaço Exclusivo</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Login -->
+
+  <!-- TELA DE LOGIN -->
   <div id="loginScreen" class="screen active">
     <div class="login-container">
       <div class="login-box">
-        <h1>Bem-vindo</h1>
+        <h1>Bem-vindo ao Arcanjo</h1>
         <p class="subtitle">Acesse seu espaço exclusivo</p>
-        <input type="email" id="loginEmail" placeholder="Email" value="arcanjo@teste.com">
-        <input type="password" id="loginPass" placeholder="Senha" value="123456">
+        
+        <input type="email" id="loginEmail" placeholder="Seu email" required>
+        <input type="password" id="loginPass" placeholder="Sua senha" required>
+        
         <button onclick="login()">Entrar</button>
-        <p>Não tem conta? <a href="#" onclick="showRegister()">Criar conta grátis</a></p>
+        <button onclick="register()" style="background:#333; margin-top:8px;">Criar Nova Conta</button>
+        
+        <button onclick="loginWithGoogle()" style="background:#4285f4; margin-top:15px; color:white;">
+          <i class="fab fa-google"></i> Entrar com Google
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- Dashboard -->
+  <!-- DASHBOARD -->
   <div id="dashboard" class="screen hidden">
-    <!-- Header -->
     <header class="header">
       <div class="nav">
         <h2>Arcanjo</h2>
@@ -40,33 +47,25 @@
       </div>
     </header>
 
-    <!-- Cover -->
     <div class="cover" id="coverPhoto">
       <button class="edit-cover-btn" onclick="editCover()"><i class="fas fa-camera"></i></button>
     </div>
 
-    <!-- Profile Info -->
     <div class="profile-section">
       <div class="profile-pic-container">
-        <img id="profilePic" src="https://i.pravatar.cc/300" alt="Perfil">
+        <img id="profilePic" src="https://i.pravatar.cc/300?u=arcanjo" alt="Perfil">
         <button class="edit-pic-btn" onclick="editProfilePic()"><i class="fas fa-camera"></i></button>
       </div>
       <h1 id="userName">Arcanjo</h1>
-      <p id="userBio" class="bio">Criador | Visionário | Compartilhando conhecimento exclusivo e experiências únicas.</p>
-      <button class="edit-bio-btn" onclick="editBio()">Editar Bio</button>
+      <p id="userBio" class="bio">Criador | Visionário | Conteúdo exclusivo.</p>
+      <button class="edit-bio-btn" onclick="editBio()">Editar Biografia</button>
     </div>
 
-    <!-- Main Content -->
     <div class="main-content">
-      <!-- Home Section -->
       <div id="homeSection" class="section">
-        <h2>Bem-vindo ao seu espaço</h2>
-        <div class="welcome-card">
-          <p>Escolha um pack e tenha acesso a conteúdos exclusivos.</p>
-        </div>
+        <h2>Bem-vindo ao seu espaço exclusivo</h2>
       </div>
 
-      <!-- Packs Section -->
       <div id="packsSection" class="section hidden">
         <h2>Pacotes de Assinatura</h2>
         <div id="packsContainer" class="packs-grid"></div>
@@ -75,25 +74,22 @@
         </button>
       </div>
 
-      <!-- Conteúdos Section -->
       <div id="contentSection" class="section hidden">
-        <h2>Meus Conteúdos</h2>
-        <p class="coming-soon">Área de conteúdos liberados em breve...</p>
+        <h2>Conteúdos Liberados</h2>
+        <p class="coming-soon">Seus conteúdos aparecerão aqui após a assinatura.</p>
       </div>
     </div>
   </div>
 
-  <!-- Modal Criar Pack -->
+  <!-- Modal Novo Pack -->
   <div id="packModal" class="modal hidden">
     <div class="modal-content">
-      <h2><i class="fas fa-gem"></i> Novo Pack</h2>
+      <h2>Novo Pack</h2>
       <input type="text" id="packTitle" placeholder="Nome do Pack">
-      <textarea id="packDesc" placeholder="Descrição do que o assinante recebe"></textarea>
+      <textarea id="packDesc" placeholder="Descrição do pack"></textarea>
       <input type="number" id="packPrice" placeholder="Valor mensal (R$)">
-      <div class="modal-buttons">
-        <button onclick="closeModal()" class="cancel">Cancelar</button>
-        <button onclick="createPack()" class="create">Criar Pack</button>
-      </div>
+      <button onclick="createPack()">Criar Pack</button>
+      <button onclick="closeModal()" class="cancel">Cancelar</button>
     </div>
   </div>
 
