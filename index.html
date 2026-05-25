@@ -1,1 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arcanjo • Espaço Exclusivo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Login -->
+  <div id="loginScreen" class="screen active">
+    <div class="login-container">
+      <div class="login-box">
+        <h1>Bem-vindo</h1>
+        <p class="subtitle">Acesse seu espaço exclusivo</p>
+        <input type="email" id="loginEmail" placeholder="Email" value="arcanjo@teste.com">
+        <input type="password" id="loginPass" placeholder="Senha" value="123456">
+        <button onclick="login()">Entrar</button>
+        <p>Não tem conta? <a href="#" onclick="showRegister()">Criar conta grátis</a></p>
+      </div>
+    </div>
+  </div>
 
+  <!-- Dashboard -->
+  <div id="dashboard" class="screen hidden">
+    <!-- Header -->
+    <header class="header">
+      <div class="nav">
+        <h2>Arcanjo</h2>
+        <div class="nav-links">
+          <a href="#" onclick="showSection('home')" class="active"><i class="fas fa-home"></i> Início</a>
+          <a href="#" onclick="showSection('packs')"><i class="fas fa-gem"></i> Packs</a>
+          <a href="#" onclick="showSection('content')"><i class="fas fa-folder"></i> Conteúdos</a>
+        </div>
+        <div class="user-header" onclick="toggleProfileMenu()">
+          <img id="headerPic" src="https://i.pravatar.cc/150" alt="">
+          <span id="headerName">Arcanjo</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Cover -->
+    <div class="cover" id="coverPhoto">
+      <button class="edit-cover-btn" onclick="editCover()"><i class="fas fa-camera"></i></button>
+    </div>
+
+    <!-- Profile Info -->
+    <div class="profile-section">
+      <div class="profile-pic-container">
+        <img id="profilePic" src="https://i.pravatar.cc/300" alt="Perfil">
+        <button class="edit-pic-btn" onclick="editProfilePic()"><i class="fas fa-camera"></i></button>
+      </div>
+      <h1 id="userName">Arcanjo</h1>
+      <p id="userBio" class="bio">Criador | Visionário | Compartilhando conhecimento exclusivo e experiências únicas.</p>
+      <button class="edit-bio-btn" onclick="editBio()">Editar Bio</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Home Section -->
+      <div id="homeSection" class="section">
+        <h2>Bem-vindo ao seu espaço</h2>
+        <div class="welcome-card">
+          <p>Escolha um pack e tenha acesso a conteúdos exclusivos.</p>
+        </div>
+      </div>
+
+      <!-- Packs Section -->
+      <div id="packsSection" class="section hidden">
+        <h2>Pacotes de Assinatura</h2>
+        <div id="packsContainer" class="packs-grid"></div>
+        <button class="add-pack-btn" onclick="showCreatePackModal()">
+          <i class="fas fa-plus"></i> Criar Novo Pack
+        </button>
+      </div>
+
+      <!-- Conteúdos Section -->
+      <div id="contentSection" class="section hidden">
+        <h2>Meus Conteúdos</h2>
+        <p class="coming-soon">Área de conteúdos liberados em breve...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Criar Pack -->
+  <div id="packModal" class="modal hidden">
+    <div class="modal-content">
+      <h2><i class="fas fa-gem"></i> Novo Pack</h2>
+      <input type="text" id="packTitle" placeholder="Nome do Pack">
+      <textarea id="packDesc" placeholder="Descrição do que o assinante recebe"></textarea>
+      <input type="number" id="packPrice" placeholder="Valor mensal (R$)">
+      <div class="modal-buttons">
+        <button onclick="closeModal()" class="cancel">Cancelar</button>
+        <button onclick="createPack()" class="create">Criar Pack</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
